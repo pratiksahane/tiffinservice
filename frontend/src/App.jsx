@@ -24,6 +24,7 @@ import Checkmeal from './components/Checkmeal/Checkmeal.jsx';
 import AddCart from './components/AddCart/AddCart.jsx';
 import ViewCart from './components/ViewCart/ViewCart.jsx';
 import Pay from './components/Pay/Pay.jsx';
+import Blogs from './components/Blogs/Blogs.jsx';
 
 const App = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -96,6 +97,7 @@ const App = () => {
   const HandlePopup11=()=>{
     setShowPopup11(true);
   };
+
 
   const navigate = useNavigate();
 
@@ -183,6 +185,7 @@ const App = () => {
             <Route path="/" element={<Hero />} />
             <Route path="/about" element={<About HandlePopup={HandlePopup} />} />
             <Route path="/contact" element={<Footer />} />
+            <Route path="/blog" element={<Blogs />} />
           </Routes>
           <Banner />
           <WhyChoose />
