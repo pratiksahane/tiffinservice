@@ -1,13 +1,13 @@
 [build]
-  base = "frontend" # This is usually empty for the root directory.
-  publish = "frontend/build" # Directory containing the built frontend files
-  command = "npm run build" # Build command for the frontend
+  base = "frontend" # Directory containing `package.json` and source files
+  publish = "frontend/build" # Directory where the build files are located
+  command = "npm run build" # Build command to generate the production build
   functions = "functions" # Directory containing the serverless functions
 
 [dev]
-  framework = "create-react-app" # Specify the framework if using React/Vite
+  framework = "vite" # Framework specification for local development
 
-# Optional: Redirects
+# Optional: Redirects for single-page applications
 [[redirects]]
   from = "/*"
   to = "/index.html"
