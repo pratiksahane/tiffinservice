@@ -3,3 +3,53 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Hide scrollbar */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  /* Container styling to prevent collision with arrows */
+  .blogs-container {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 16px; /* Space for the bottom arrow button */
+  }
+  
+  .blogs-wrapper {
+    position: relative;
+  }
+  
+  button {
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #e2e2e2;
+  }
+  
+  .scroll-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #e2e2e2;
+    border: none;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+    z-index: 10; /* Ensure button is above other content */
+  }
+  
+  .scroll-button.left {
+    left: 10px; /* Adjust as needed */
+  }
+  
+  .scroll-button.right {
+    right: 10px; /* Adjust as needed */
+  }
+  
+

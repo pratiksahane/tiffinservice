@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './index.css';
 import { useNavigate, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar.jsx';
 import Banner from './components/Banner/Banner.jsx';
@@ -25,6 +26,7 @@ import AddCart from './components/AddCart/AddCart.jsx';
 import ViewCart from './components/ViewCart/ViewCart.jsx';
 import Pay from './components/Pay/Pay.jsx';
 import Blogs from './components/Blogs/Blogs.jsx';
+import Addblogs from './components/Addblogs/Addblogs.jsx';
 
 const App = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -48,6 +50,7 @@ const App = () => {
   const [showViewcart, setShowPopup10]=useState(false);
   const [username, setUserName]=useState([]);
   const [showPay, setShowPopup11]=useState(false);
+  const [showPopup12, setShowPopup12]=useState(false);
 
 
   const HandlePopup = () => {
@@ -98,7 +101,10 @@ const App = () => {
     setShowPopup11(true);
   };
 
+  const HandlePopup12=()=>{
+    setShowPopup12(true);
 
+  }
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -164,7 +170,8 @@ const App = () => {
       case 'Admin':
         return (
           <>
-            <Dashboarda userId={userId} handleLogout={handleLogout} HandlePopup9={HandlePopup9}/>
+            <Dashboarda userId={userId} HandlePopup12={HandlePopup12} handleLogout={handleLogout}/>
+            <Addblogs setShowPopup12={setShowPopup12} showPopup12={showPopup12} />
           </>
         );
       default:
@@ -188,6 +195,7 @@ const App = () => {
             <Route path="/blog" element={<Blogs />} />
           </Routes>
           <Banner />
+          <Blogs />
           <WhyChoose />
           <About HandlePopup={HandlePopup}/>
           <Banner />

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import polygon from "../../assets/admin.png"
 
-const Dashboarda = ({ userId, handleLogout }) => {
+const Dashboarda = ({ userId, HandlePopup12, handleLogout }) => {
     const [userData, setUserData] = useState(null);
     const [error, setError] = useState(null);
 
@@ -62,6 +62,7 @@ const Dashboarda = ({ userId, handleLogout }) => {
         <button className="bg-primary text-white px-4 py-2 rounded hover:bg-secondary hover:scale-105 duration-300 w-1/6">Profit</button>
         <button className="bg-primary text-white px-4 py-2 rounded hover:bg-secondary hover:scale-105 duration-300 w-1/6">Remove Seller</button>
         <button className="bg-primary text-white px-4 py-2 rounded hover:bg-secondary hover:scale-105 duration-300 w-1/6">Remove User</button>
+        <button onClick={HandlePopup12} className="bg-primary text-white px-4 py-2 rounded hover:bg-secondary hover:scale-105 duration-300 w-1/6">Add Blogs</button>
         <button onClick={handleLogout} className="bg-primary text-white px-4 py-2 rounded hover:bg-secondary hover:scale-105 duration-300 w-1/6">Logout</button>
         
       </div>

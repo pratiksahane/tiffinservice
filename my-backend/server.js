@@ -312,6 +312,38 @@ app.post('/api/viewcart', (req, res) => {
   });
 });
 
+{/*For adding blogs*/}
+app.post('/api/addblogs', (req, res) => {
+  const { title,content } = req.body;
+
+  console.log('Received add blog request:', req.body);
+   
+
+    const sql = 'INSERT INTO addblogs (title,content) VALUES (?, ?)';
+    db.query(sql, [title,content], (err, result) => {
+      if (err) {
+        console.error('Error querying database:', err);
+        return res.status(500).json({ error: err.message });
+      }
+      console.log('Blog data saved successfully:', result);
+      res.status(200).json({ message: 'User data saved successfully' });
+    }); 
+});
+
+{/*for fetching blog data*/}
+// API to fetch all blogs
+app.get('/api/blogs', (req, res) => {
+  const sql = 'SELECT * FROM addblogs';
+  db.query(sql, (err, results) => {
+    if (err) {
+      console.error('Error fetching blog data:', err);
+      return res.status(500).json({ error: err.message });
+    }
+    console.log('Fetched blog data successfully:', results);
+    res.status(200).json(results);
+  });
+});
+
 
 // Start the server
 app.listen(port, () => {
