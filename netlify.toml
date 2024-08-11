@@ -1,7 +1,7 @@
 [build]
   base = "frontend" # This is usually empty for the root directory.
   publish = "frontend/build" # Directory containing the built frontend files
-  command = "cd frontend && npm run build" # Build command for the frontend
+  command = "npm run build" # Build command for the frontend
   functions = "functions" # Directory containing the serverless functions
 
 [dev]
