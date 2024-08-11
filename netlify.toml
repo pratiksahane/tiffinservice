@@ -1,0 +1,14 @@
+[build]
+  base = "" # This is usually empty for the root directory.
+  publish = "frontend/build" # Directory containing the built frontend files
+  command = "cd frontend && npm run build" # Build command for the frontend
+  functions = "functions" # Directory containing the serverless functions
+
+[dev]
+  framework = "create-react-app" # Specify the framework if using React/Vite
+
+# Optional: Redirects
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
