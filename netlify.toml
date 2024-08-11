@@ -1,6 +1,6 @@
 [build]
   base = "frontend" # Directory containing `package.json` and source files
-  publish = "frontend/build" # Directory where the build files are located
+  publish = "frontend/dist" # Directory where the build files are located
   command = "npm run build" # Build command to generate the production build
   functions = "functions" # Directory containing the serverless functions
 
