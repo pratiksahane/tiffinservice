@@ -57,7 +57,6 @@ const SignPopup = ({ showPopup1, setShowPopup1 }) => {
               >
                 <option value="Seller">Tiffin Service Seller</option>
                 <option value="User">Service User</option>
-                <option value="Admin">Admin</option>
               </select>
               <input
                 type="email"
