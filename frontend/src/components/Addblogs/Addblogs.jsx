@@ -14,7 +14,7 @@ const Addblogs = ({ showPopup12, setShowPopup12 }) => {
      content,
     };
 
-    axios.post('/.netlify/functions/addblogs', userData)
+    axios.post('/.netlify/functions/blogs', userData)
       .then(response => {
         console.log(response.data.message);
         alert("Added Successfully");
