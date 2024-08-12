@@ -344,6 +344,14 @@ app.get('/api/blogs', (req, res) => {
   });
 });
 
+app.use(express.static(path.join(__dirname, 'frontend/build')));
+
+// Catch-all handler for serving frontend application (if applicable)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'));
+});
+
+
 
 // Start the server
 app.listen(port, () => {
