@@ -23,7 +23,7 @@ const Popup = ({ showPopup, setShowPopup, handleLogin }) => {
     };
   
     try {
-      const response = await axios.post("/.netlify/functions/signup", userData);
+      const response = await axios.post("/.netlify/functions/login", userData);
       if (response.data.message === "Login successful") {
         alert("Login successful");
         handleLogin(response.data.userId, userType);
