@@ -2,7 +2,7 @@
   base = "frontend" # Directory containing `package.json` and source files
   publish = "dist" # Directory where the build files are located
   command = "npm run build" # Build command to generate the production build
-  functions = "functions" # Directory containing the serverless functions
+  functions = "netlify/functions" # Directory containing the serverless functions
 
 [dev]
   framework = "vite" # Framework specification for local development
