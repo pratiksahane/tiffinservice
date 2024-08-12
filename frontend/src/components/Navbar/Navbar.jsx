@@ -45,7 +45,7 @@ const Navbar = ({ HandlePopup, HandlePopup1 }) => {
             <li>
               <button 
                 onClick={HandlePopup} 
-                className='flex justify-center gap-2 bg-secondary text-xl h-[40px] text-white px-2 md:px-5 py-2 hover:scale-105 duration-300'
+                className='flex justify-center gap-2 bg-secondary text-xl h-[40px] text-white px-2 md:px-5 py-2 hover:scale-105 duration-300 hover:bg-secondary'
               >
                 <FaUser />
                 My Account
