@@ -6,7 +6,7 @@ const NavLinks = [
   {
     id: 1,
     name: 'Home',
-    link: '/home'
+    link: '/'
   },
   {
     id: 2,
