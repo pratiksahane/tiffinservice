@@ -3,7 +3,7 @@ import axios from 'axios';
 import polygon from '../../assets/user.png';
 import { addCart } from '../AddCart/AddCart';
 
-const Dashboardu = ({ userId, HandlePopup9, HandlePopup10, HandlePopup11, setUserName, cart2, mealData2, setCartData, handleLogout }) => {
+const Dashboardu = ({ userId, HandlePopup9, HandlePopup10, HandlePopup11, setUserName, cart2, mealData2, setCartData, setCartData1, handleLogout }) => {
   console.log("Meal data received in Dashboards component:", mealData2);
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
@@ -35,6 +35,19 @@ const Dashboardu = ({ userId, HandlePopup9, HandlePopup10, HandlePopup11, setUse
 
     // Add the meal ID to the addedMeals state to disable the button
     setAddedMeals((prev) => [...prev, meal.id]);
+  };
+
+  const HandleCart1 = (meal) => {
+    if (!meal || !meal.id || !meal.planname || !meal.sellername || !meal.days || !meal.price || !meal.description) {
+      alert('Invalid meal data');
+      return;
+    }
+    const Data = {
+      ...meal
+    };
+
+    setCartData1(Data);// Call AddCart with the correct data only when user clicks
+
   };
 
   useEffect(() => {
@@ -161,7 +174,7 @@ const Dashboardu = ({ userId, HandlePopup9, HandlePopup10, HandlePopup11, setUse
                   <td className="border-b py-2">{meal.price}</td>
                   <td className="border-b py-2">{meal.description}</td>
                   <td className="border-b py-4">
-                    <button onClick={HandlePopup11} className='text-white hover:scale-105 duration-200 px-4 py-2 bg-primary hover:bg-secondary'>
+                    <button onClick={() => {HandlePopup11(); HandleCart1(meal);}} className='text-white hover:scale-105 duration-200 px-4 py-2 bg-primary hover:bg-secondary'>
                       Buy
                     </button>
                   </td>

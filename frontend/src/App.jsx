@@ -51,6 +51,7 @@ const App = () => {
   const [username, setUserName]=useState([]);
   const [showPay, setShowPopup11]=useState(false);
   const [showPopup12, setShowPopup12]=useState(false);
+  const [cartData1, setCartData1]=useState([]);
 
 
   const HandlePopup = () => {
@@ -134,11 +135,11 @@ const App = () => {
       case 'User':
         return (
           <>
-            <Dashboardu userId={userId} HandlePopup9={HandlePopup9} HandlePopup10={HandlePopup10} HandlePopup11={HandlePopup11} setUserName={setUserName} cart2={cart2} mealData2={mealData2} setCartData={setCartData} handleLogout={handleLogout} /> 
+            <Dashboardu userId={userId} HandlePopup9={HandlePopup9} HandlePopup10={HandlePopup10} HandlePopup11={HandlePopup11} setUserName={setUserName} cart2={cart2} mealData2={mealData2} setCartData={setCartData} setCartData1={setCartData1} handleLogout={handleLogout} /> 
             <Checkmeal showCheckmeal={showCheckmeal} setShowPopup9={setShowPopup9} setMealData2={setMealData2} />
             <AddCart cart={cart}/>
             <ViewCart showViewcart={showViewcart} setShowPopup10={setShowPopup10} setCartData2={setCartData2} username={username} />
-            <Pay showPay={showPay} setShowPopup11={setShowPopup11} username={username} />
+            <Pay showPay={showPay} setShowPopup11={setShowPopup11} username={username} cartData1={cartData1} />
           </>
         );
       case 'Seller':
