@@ -190,7 +190,7 @@ const App = () => {
         <>
           <Navbar HandlePopup={HandlePopup} HandlePopup1={HandlePopup1} />
           <Routes>
-            <Route path="/" element={<Hero />} />
+            <Route path="/home" element={<Hero />} />
             <Route path="/about" element={<About HandlePopup={HandlePopup} />} />
             <Route path="/contact" element={<Footer />} />
             <Route path="/blog" element={<Blogs />} />

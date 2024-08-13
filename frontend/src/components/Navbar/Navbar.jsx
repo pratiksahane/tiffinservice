@@ -1,11 +1,12 @@
 import React from 'react';
 import { FaCaretDown, FaUser, FaUtensils } from 'react-icons/fa';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 const NavLinks = [
   {
     id: 1,
     name: 'Home',
-    link: '/'
+    link: '/home'
   },
   {
     id: 2,
@@ -20,7 +21,7 @@ const NavLinks = [
   {
     id: 4,
     name: 'Blogs',
-    link:'/blog'
+    link: '/blog'
   }
 ];
 
@@ -38,7 +39,9 @@ const Navbar = ({ HandlePopup, HandlePopup1 }) => {
           <ul className='flex items-center gap-10'>
             {NavLinks.map(({ id, name, link }) => (
               <li key={id}>
-                <a href={link} className='hidden sm:inline-block hover:text-primary text-xl font-semibold'>{name}</a>
+                <Link to={link} className='hidden sm:inline-block hover:text-primary text-xl font-semibold'>
+                  {name}
+                </Link>
               </li>
             ))}
             {/* Login button section */}
@@ -46,6 +49,7 @@ const Navbar = ({ HandlePopup, HandlePopup1 }) => {
               <button 
                 onClick={HandlePopup} 
                 className='flex justify-center gap-2 bg-secondary text-xl h-[40px] text-white px-2 md:px-5 py-2 hover:scale-105 duration-300 hover:bg-secondary'
+                aria-label="My Account"
               >
                 <FaUser />
                 My Account
