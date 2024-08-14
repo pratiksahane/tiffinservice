@@ -332,7 +332,7 @@ app.post('/api/addblogs', (req, res) => {
 
 {/*for fetching blog data*/}
 // API to fetch all blogs
-app.get('/v1/functions/blogs', (req, res) => {
+app.get('/api/blogs', (req, res) => {
   const sql = 'SELECT * FROM addblogs';
   db.query(sql, (err, results) => {
     if (err) {
