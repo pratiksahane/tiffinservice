@@ -115,7 +115,7 @@ app.get('/api/user/:userId', (req, res) => {
   });
 });
 
-{/*For adding dish */}
+{/*For adding dish */}852
 
 app.post('/api/adddish', (req, res) => {
   const { type, planname, sellername, days, price, description } = req.body;
@@ -332,7 +332,7 @@ app.post('/api/addblogs', (req, res) => {
 
 {/*for fetching blog data*/}
 // API to fetch all blogs
-app.get('/api/blogs', (req, res) => {
+app.get('/v1/functions/blogs', (req, res) => {
   const sql = 'SELECT * FROM addblogs';
   db.query(sql, (err, results) => {
     if (err) {
