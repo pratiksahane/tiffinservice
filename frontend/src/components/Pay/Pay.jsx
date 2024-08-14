@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { IoCloseOutline } from 'react-icons/io5';
 
-const Pay = ({ showPay, setShowPopup11, username, cartData1 }) => {
+const Pay = ({ showPay, setShowPopup11, username, cartData1}) => {
   console.log(cartData1);
+  const [time,setTime]=useState('');
+  const [number,setNumber]=useState('');
+  const [status, setStatus] = useState('ongoing');
 
   // Extract data from cartData1
   const {
@@ -19,34 +22,31 @@ const Pay = ({ showPay, setShowPopup11, username, cartData1 }) => {
     e.preventDefault();
 
     const userData = {
+      username,
       meal_id: cartData1.id,
       meal_type: cartData1.meal_type,
       planname: cartData1.planname,
+      status,
       sname: cartData1.sellername,
+      time,
       days: cartData1.days,
       price: cartData1.price,
       description: cartData1.description,
+      number
     };
 
-    try {
-      const response = await axios.post("http://localhost:3002/api/pay", userData);
-
-      if (response.data.message === "Successfully Fetched Data") {
-        alert("Data fetched successfully");
-        setShowPopup11(false); // Close the popup after data is set
-      } else {
-        alert("No meals found for the given criteria");
-      }
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        console.error("Axios error:", error);
-        alert(`An error occurred during fetching: ${error.response ? error.response.data.message : error.message}`);
-      } else {
-        console.error("Unknown error:", error);
-        alert("An unknown error occurred during fetching");
-      }
-    }
+    axios.post('http://localhost:3002/api/pay', userData)
+      .then(response => {
+        console.log(response.data.message);
+        alert("Ordered Successfully");
+        setShowPopup11(false);
+      })
+      .catch(error => {
+        console.error('There was an error!', error);
+        alert(`An error occurred during Ordering: ${error.message}`);
+      });
   };
+
 
   return (
     <>
@@ -65,6 +65,14 @@ const Pay = ({ showPay, setShowPopup11, username, cartData1 }) => {
               </div>
             </div>
             <form onSubmit={handleAvailable} className='mt-4'>
+            <select
+                className='w-full rounded-md border border-gray-300 dark:border-gray-500 px-2 py-1 mb-4'
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+              >
+                <option value="ongoing">On-going</option>
+                <option value="onhalt">On-halt</option>
+              </select>
               <input
                 type="text"
                 placeholder='Tiffin service seller name:'
@@ -112,6 +120,22 @@ const Pay = ({ showPay, setShowPopup11, username, cartData1 }) => {
                 className='w-full rounded-md border border-gray-300 dark:border-gray-500 px-2 py-1 mb-4'
                 value={description || ''}
                 readOnly
+              />
+              <input
+                type="text"
+                placeholder='Enter Time(Ex.11:00p.m) For Delivery Or Takeout:'
+                className='w-full rounded-md border border-gray-300 dark:border-gray-500 px-2 py-1 mb-4'
+                value={time}
+                onChange={e => setTime(e.target.value)}
+                autoComplete="time"
+              />
+              <input
+                type="text"
+                placeholder='Enter Contact Number:'
+                className='w-full rounded-md border border-gray-300 dark:border-gray-500 px-2 py-1 mb-4'
+                value={number}
+                onChange={e => setNumber(e.target.value)}
+                autoComplete="number"
               />
               <div>
                 <button

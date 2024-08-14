@@ -343,9 +343,139 @@ app.get('/api/blogs', (req, res) => {
     res.status(200).json(results);
   });
 });
+
+{/*for checking meal*/}
+app.post('/api/viewsubsu', (req, res) => {
+  const { type, priceRange } = req.body;
+  console.log(priceRange);
+
+  const [minPrice, maxPrice] = priceRange.split(',').map(Number);
+
+  if (isNaN(minPrice) || isNaN(maxPrice)) {
+    return res.status(400).json({ message: 'Invalid price range provided' });
+  }
+
+  const sql = 'SELECT * FROM addsubs WHERE price BETWEEN ? AND ? AND type = ?';
+  db.query(sql, [minPrice, maxPrice, type], (err, results) => {
+    if (err) {
+      console.error('Error querying database:', err);
+      return res.status(500).json({ message: 'Error querying database' });
+    }
+
+    if (results.length > 0) {
+      res.status(200).json({
+        message: 'Successfully Fetched Data',
+        data: results
+      });
+    } else {
+      res.status(404).json({ message: 'No meals found for the given criteria' });
+    }
+  });
+});
+
+{/*Order section*/}
+
+app.post('/api/pay', (req, res) => {
+  const { username,meal_id,meal_type,planname,status,sname,time,days,price,description,number } = req.body;
+
+  console.log('Received order request:', req.body);
+
+    const sql = 'INSERT INTO orders (username, meal_id ,meal_type ,planname,status,sname ,time ,days ,price ,description,number) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    db.query(sql, [username, meal_id ,meal_type ,planname,status,sname ,time ,days ,price ,description ,number], (err, result) => {
+      if (err) {
+        console.error('Error querying database:', err);
+        return res.status(500).json({ error: err.message });
+      }
+      console.log('User data saved successfully:', result);
+      res.status(200).json({ message: 'User data saved successfully' });
+    });
+});
+
+{/*Subscription Order section*/}
+
+app.post('/api/buysubs', (req, res) => {
+  const { username,id,planname,price,password  } = req.body;
+
+  console.log('Received order request:', req.body);
+
+    const sql = 'INSERT INTO orderSubs (username, s_id, planname, price, password) VALUES (?, ?, ?, ?, ?)';
+    db.query(sql, [username, id ,planname ,price ,password], (err, result) => {
+      if (err) {
+        console.error('Error querying database:', err);
+        return res.status(500).json({ error: err.message });
+      }
+      console.log('User data saved successfully:', result);
+      res.status(200).json({ message: 'User data saved successfully' });
+    });
+});
+
+{/*for +previous order*/}
+app.post('/api/previousorder', (req, res) => {
+  const { username,type } = req.body;
+
+  const sql = 'SELECT * FROM orders WHERE username=? AND meal_type = ?';
+  db.query(sql, [username, type], (err, results) => {
+    if (err) {
+      console.error('Error querying database:', err);
+      return res.status(500).json({ message: 'Error querying database' });
+    }
+
+    if (results.length > 0) {
+      res.status(200).json({
+        message: 'Successfully Fetched Data',
+        data: results
+      });
+    } else {
+      res.status(404).json({ message: 'No meals found for the given criteria' });
+    }
+  });
+});
+
+{/*Updating status*/}
+app.post('/api/update', (req, res) => {
+  const { username, order_id, status } = req.body;
+
+  console.log('Received order update request:', req.body);
+
+  const sql = 'UPDATE orders SET status = ? WHERE username = ? AND id = ?';
+  db.query(sql, [status, username, order_id], (err, result) => {
+    if (err) {
+      console.error('Error querying database:', err);
+      return res.status(500).json({ error: err.message });
+    }
+    console.log('Order status updated successfully:', result);
+    res.status(200).json({ message: 'Order status updated successfully' });
+  });
+});
+
+{/*For reteriving your buyed subscription*/}
+app.post('/api/subscriptiono', (req, res) => {
+  const { username, s_id, password } = req.body;
+
+  const sql = 'SELECT * FROM orderSubs WHERE username=? and s_id=? and password=?';
+  db.query(sql, [username, s_id, password], (err, results) => {
+    if (err) {
+      console.error('Error querying database:', err);
+      return res.status(500).json({ message: 'Error querying database' });
+    }
+
+    if (results.length > 0) {
+      res.status(200).json({
+        message: 'Successfully Fetched Data',
+        data: results
+      });
+    } else {
+      res.status(404).json({ message: 'No meals Subscription found for the given criteria' });
+    }
+  });
+});
+
+
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+
 
 

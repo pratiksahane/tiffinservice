@@ -27,6 +27,11 @@ import ViewCart from './components/ViewCart/ViewCart.jsx';
 import Pay from './components/Pay/Pay.jsx';
 import Blogs from './components/Blogs/Blogs.jsx';
 import Addblogs from './components/Addblogs/Addblogs.jsx';
+import Viewsubsu from './components/Viewsubsu/Viewsubsu.jsx';
+import Buysubs from './components/Buysubs/Buysubs.jsx';
+import Previousorder from './components/Previousorders/Previousorders.jsx';
+import Update from './components/Update/Update.jsx';
+import SubscriptionO from './components/SubscriptionO/SubscriptionO.jsx';
 
 const App = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -52,7 +57,15 @@ const App = () => {
   const [showPay, setShowPopup11]=useState(false);
   const [showPopup12, setShowPopup12]=useState(false);
   const [cartData1, setCartData1]=useState([]);
-
+  const [showViewSubsu, setShowPopup13]= useState(false);
+  const [subsData, setSubsData]=useState([]);
+  const [showBuysubs,setShowPopup14]=useState(false);
+  const [buy, setBuy]=useState([]);
+  const [showPreviousorder,setShowPopup15]=useState(false);
+  const [previousOrder, setPreviousOrderData]=useState([]);
+  const [showUpdate,setShowPopup16]=useState(false);
+  const [showSubscriptionO,setShowPopup17]=useState(false);
+  const [orderSubs, setOrdersubs]=useState([]);
 
   const HandlePopup = () => {
     setShowPopup(true);
@@ -106,6 +119,26 @@ const App = () => {
     setShowPopup12(true);
 
   }
+  const HandlePopup13=()=>{
+    setShowPopup13(true);
+
+  }
+  const HandlePopup14=()=>{
+    setShowPopup14(true);
+
+  }
+  const HandlePopup15=()=>{
+    setShowPopup15(true);
+
+  }
+  const HandlePopup16=()=>{
+    setShowPopup16(true);
+
+  }
+  const HandlePopup17=()=>{
+    setShowPopup17(true);
+
+  }
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -135,11 +168,16 @@ const App = () => {
       case 'User':
         return (
           <>
-            <Dashboardu userId={userId} HandlePopup9={HandlePopup9} HandlePopup10={HandlePopup10} HandlePopup11={HandlePopup11} setUserName={setUserName} cart2={cart2} mealData2={mealData2} setCartData={setCartData} setCartData1={setCartData1} handleLogout={handleLogout} /> 
+            <Dashboardu userId={userId} HandlePopup9={HandlePopup9} HandlePopup10={HandlePopup10} HandlePopup11={HandlePopup11} HandlePopup13={HandlePopup13} HandlePopup14={HandlePopup14} HandlePopup15={HandlePopup15} HandlePopup16={HandlePopup16} HandlePopup17={HandlePopup17} setUserName={setUserName} cart2={cart2} mealData2={mealData2} setCartData={setCartData} setCartData1={setCartData1} subsData={subsData} setBuy={setBuy} previousOrder={previousOrder} orderSubs={orderSubs} handleLogout={handleLogout} /> 
             <Checkmeal showCheckmeal={showCheckmeal} setShowPopup9={setShowPopup9} setMealData2={setMealData2} />
             <AddCart cart={cart}/>
             <ViewCart showViewcart={showViewcart} setShowPopup10={setShowPopup10} setCartData2={setCartData2} username={username} />
-            <Pay showPay={showPay} setShowPopup11={setShowPopup11} username={username} cartData1={cartData1} />
+            <Pay showPay={showPay} setShowPopup11={setShowPopup11} username={username} cartData1={cartData1}/>
+            <Viewsubsu showViewSubsu={showViewSubsu} setShowPopup13={setShowPopup13} setSubsData={setSubsData}/>
+            <Buysubs showBuysubs={showBuysubs} setShowPopup14={setShowPopup14} username={username} buy={buy}/>
+            <Previousorder showPreviousorder={showPreviousorder} setShowPopup15={setShowPopup15} setPreviousOrderData={setPreviousOrderData} username={username} />
+            <Update showUpdate={showUpdate} setShowPopup16={setShowPopup16} username={username}/>
+            <SubscriptionO showSubscriptionO={showSubscriptionO} setShowPopup17={setShowPopup17} setOrdersubs={setOrdersubs} username={username}/>
           </>
         );
       case 'Seller':
