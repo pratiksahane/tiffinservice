@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql2');
@@ -7,7 +8,7 @@ const Joi = require('joi');
 const saltRounds = 10;
 
 const app = express();
-const port = 3002;
+const PORT = process.env.PORT || 3002;
 
 // Middleware
 app.use(cors());
@@ -15,10 +16,10 @@ app.use(bodyParser.json());
 
 // Create MySQL connection
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '14032005pratik',
-  database: 'mydatabase'
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE
 });
 
 db.connect(err => {
@@ -473,8 +474,8 @@ app.post('/api/subscriptiono', (req, res) => {
 
 
 // Start the server
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
 
 
