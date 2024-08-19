@@ -4,7 +4,7 @@ import { IoCloseOutline } from 'react-icons/io5';
 
 const Checkmeal = ({ showCheckmeal, setShowPopup9 ,setMealData2}) => {
   const [type, setType] = useState('veg');
-  const [priceRange, setpriceRange] =useState('120,200');
+  const [priceRange, setpriceRange] =useState('40,120');
 
 
   const handleAvailable = async (e) => {
@@ -68,6 +68,7 @@ const Checkmeal = ({ showCheckmeal, setShowPopup9 ,setMealData2}) => {
                 value={priceRange}
                 onChange={(e) => setpriceRange(e.target.value)}
               >
+                <option value="120,200">40-100</option>
                 <option value="120,200">120-200</option>
                 <option value="200,500">200-500</option>
               </select>
