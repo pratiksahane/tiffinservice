@@ -32,7 +32,7 @@ const Navbar = ({ HandlePopup, HandlePopup1 }) => {
         {/* Logo section */}
         <div className="flex items-center space-x-2 font-bold text-3xl group">
           <FaUtensils className='text-3xl group-hover:text-pink-500 duration-200' />
-          <span className='group-hover:text-pink-500'>Dine With Us</span>
+          <span className='group-hover:text-pink-500'>Ghar-2-Ghar</span>
         </div>
         {/* Nav links section */}
         <div>

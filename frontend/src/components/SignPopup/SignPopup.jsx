@@ -93,10 +93,15 @@ const SignPopup = ({ showPopup1, setShowPopup1 }) => {
               </div>
               {/* Social Login */}
               <div className='mt-4'>
-                <p className='text-center'>or Sign up with</p>
+                <p className='text-center'>or Sign in with</p>
                 <div className='flex justify-center gap-2 mt-2'>
-                  <FaFacebook className='text-3xl hover:text-blue-500 duration-200' />
-                  <FaGoogle className='text-3xl hover:text-primary duration-200' />
+                <a href="https://www.facebook.com/r.php/" target="_blank" rel="noopener noreferrer">
+                  <FaFacebook className="text-3xl hover:text-blue-500 duration-200" />
+                </a>
+                <a href="https://accounts.google.com" target="_blank" rel="noopener noreferrer">
+                <FaGoogle className="text-3xl hover:text-primary duration-200" />
+                </a>
+
                 </div>
               </div>
             </form>

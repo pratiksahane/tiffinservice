@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { IoCloseOutline } from 'react-icons/io5';
 
-const Screening = ({ showScreeningPopout, setShowPopup3 }) => {
+const Screening = ({ showScreeningPopout, setShowPopup3 ,sellername}) => {
   const [userType, setUserType] = useState('Tiffin Service Manager');
-  const [name,setName] = useState('');
   const [nationality, setNationality] = useState('');
   const [cardno, setCardno] = useState('');
   const [description, setDescription] = useState('');
@@ -13,7 +12,7 @@ const Screening = ({ showScreeningPopout, setShowPopup3 }) => {
     e.preventDefault();
     const userData={
       userType,
-      name,
+      sellername,
       nationality,
       cardno,
       description
@@ -63,9 +62,8 @@ const Screening = ({ showScreeningPopout, setShowPopup3 }) => {
                 type="text"
                 placeholder='Enter your name:'
                 className='w-full rounded-md border border-gray-300 dark:border-gray-500 px-2 py-1 mb-4'
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                autoComplete="price"
+                value={sellername}
+                readOnly
               />
               <input
                 type="text"

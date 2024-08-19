@@ -98,8 +98,12 @@ const Popup = ({ showPopup, setShowPopup, handleLogin }) => {
               <div className='mt-4'>
                 <p className='text-center'>or Login with</p>
                 <div className='flex justify-center gap-2 mt-2'>
-                  <FaFacebook className='text-3xl hover:text-blue-500 duration-200' />
-                  <FaGoogle className='text-3xl hover:text-primary duration-200' />
+                <a href="https://www.facebook.com/r.php/" target="_blank" rel="noopener noreferrer">
+                  <FaFacebook className="text-3xl hover:text-blue-500 duration-200" />
+                </a>
+                <a href="https://accounts.google.com" target="_blank" rel="noopener noreferrer">
+                <FaGoogle className="text-3xl hover:text-primary duration-200" />
+                </a>
                 </div>
               </div>
             </div>

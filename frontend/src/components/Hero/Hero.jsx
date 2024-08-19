@@ -1,5 +1,5 @@
 import React from 'react';
-import HeroImg from "../../assets/Hero.png";
+import HeroImg from "../../assets/Hero2.png";
 import HeroBg from "../../assets/HeroBg.png";
 import PrimaryButton from '../Shared/PrimaryButton';
 
@@ -20,7 +20,7 @@ const Hero = () => {
           {/* Text-content section */}
           <div className='space-y-7 text-dark order-2 sm:order-1'>
             <h1 data-aos="fade-up" className='text-5xl'>
-              Tiffin services now in your locality brought together by <span className='text-secondary font-cursive text-7xl'>Dine with us</span>
+              Tiffin services now in your locality brought together by <span className='text-secondary font-cursive text-7xl'>ghar 2 ghar</span>
             </h1>
             <p data-aos="fade-up" data-aos-delay="300" className='lg:pr-64'>
               Delicious food now delivered to your door

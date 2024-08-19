@@ -32,6 +32,8 @@ import Buysubs from './components/Buysubs/Buysubs.jsx';
 import Previousorder from './components/Previousorders/Previousorders.jsx';
 import Update from './components/Update/Update.jsx';
 import SubscriptionO from './components/SubscriptionO/SubscriptionO.jsx';
+import UserReason from './components/UserReason/UserReason.jsx';
+import SellerReason from './components/SellerReason/SellerReason.jsx';
 
 const App = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -66,6 +68,10 @@ const App = () => {
   const [showUpdate,setShowPopup16]=useState(false);
   const [showSubscriptionO,setShowPopup17]=useState(false);
   const [orderSubs, setOrdersubs]=useState([]);
+  const [showUserRemove,setShowPopup18]=useState(false);
+  const [username1, setUserName1]=useState([]);
+  const [showSellerRemove,setShowPopup19]=useState(false);
+  const [username2, setUserName2]=useState([]);
 
   const HandlePopup = () => {
     setShowPopup(true);
@@ -139,6 +145,15 @@ const App = () => {
     setShowPopup17(true);
 
   }
+  const HandlePopup18=()=>{
+    setShowPopup18(true);
+
+  }
+  const HandlePopup19=()=>{
+    setShowPopup19(true);
+
+  }
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -199,7 +214,7 @@ const App = () => {
             />
             <AdddishesPopout showAdddishesPopout={showAdddishesPopout} setShowPopup2={setShowPopup2} sellername={sellername} />
             <Removemeal showRemovemeal={showRemovemeal} setShowPopup5={setShowPopup5} sellername={sellername}/>
-            <Screening showScreeningPopout={showScreeningPopout} setShowPopup3={setShowPopup3} />
+            <Screening showScreeningPopout={showScreeningPopout} setShowPopup3={setShowPopup3} sellername={sellername}/>
             <Availablemeal showAvailablemeal={showAvailablemeal} setShowPopup4={setShowPopup4} setMealData={setMealData} sellername={sellername}/>
             <Addsubs showAddsubs={showAddsubs} setShowPopup6={setShowPopup6} sellername={sellername} />
             <Removesubs showRemovesubs={showRemovesubs} setShowPopup7={setShowPopup7} sellername={sellername} />
@@ -209,8 +224,10 @@ const App = () => {
       case 'Admin':
         return (
           <>
-            <Dashboarda userId={userId} HandlePopup12={HandlePopup12} handleLogout={handleLogout}/>
+            <Dashboarda userId={userId} HandlePopup12={HandlePopup12} HandlePopup18={HandlePopup18} HandlePopup19={HandlePopup19} setUserName2={setUserName2} setUserName1={setUserName1} handleLogout={handleLogout}/>
             <Addblogs setShowPopup12={setShowPopup12} showPopup12={showPopup12} />
+            <UserReason showUserRemove={showUserRemove} setShowPopup18={setShowPopup18} username1={username1} />
+            <SellerReason showSellerRemove={showSellerRemove} setShowPopup19={setShowPopup19} username2={username2} />
           </>
         );
       default:

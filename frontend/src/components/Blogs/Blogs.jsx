@@ -35,7 +35,7 @@ const Blogs = () => {
   return (
     <div className="container mx-auto py-10">
       <h1 className="text-4xl font-bold mb-6 text-primary hover:text-secondary">Blogs</h1>
-      <div className="relative ">
+      <div className="relative">
         <button
           onClick={scrollLeft}
           className="absolute left-0 top-1/2 transform -translate-y-1/2 p-2 bg-gray-200 rounded-full text-gray-700 hover:bg-gray-300 z-10"
@@ -44,13 +44,13 @@ const Blogs = () => {
         </button>
         <div
           ref={containerRef}
-          className=" flex overflow-x-auto space-x-6 scrollbar-hide pb-4"
+          className="flex overflow-x-auto space-x-6 scrollbar-hide pb-4"
         >
           {blogs.length > 0 ? (
             blogs.map((blog) => (
               <div
                 key={blog.id}
-                className=" min-w-[300px] bg-white p-4 rounded-lg shadow-md flex-shrink-0"
+                className="w-[300px] bg-white p-4 rounded-lg shadow-md flex-shrink-0 h-[400px] border-2 border-primary"
               >
                 <h2 className="text-2xl font-semibold">{blog.title}</h2>
                 <p className="text-lg">{blog.content}</p>

@@ -118,7 +118,7 @@ app.get('/api/user/:userId', (req, res) => {
   });
 });
 
-{/*For adding dish */}852
+{/*For adding dish */}
 
 app.post('/api/adddish', (req, res) => {
   const { type, planname, sellername, days, price, description } = req.body;
@@ -156,12 +156,12 @@ app.post('/api/removemeal', (req, res) => {
 {/*For screening Process */}
 
 app.post('/api/screening', (req, res) => {
-  const { userType,name,nationality,cardno,description } = req.body;
+  const { userType,sellername,nationality,cardno,description } = req.body;
 
   console.log('Received adddish request:', req.body);
 
   const sql = 'INSERT INTO screening (userType,name,nationality,cardno,description) VALUES ( ?, ?, ?, ?, ?)';
-  db.query(sql, [userType,name,nationality,cardno,description], (err, result) => {
+  db.query(sql, [userType,sellername,nationality,cardno,description], (err, result) => {
     if (err) {
       console.error('Error querying database:', err);
       return res.status(500).json({ error: 'Error querying database' });
@@ -473,12 +473,289 @@ app.post('/api/subscriptiono', (req, res) => {
   });
 });
 
+{/*Check user*/}
+// Check all users
+app.get('/api/checkuser', (req, res) => {
+  const userType="User";
+  const sql = 'SELECT * FROM users where userType=?';
+  
+  db.query(sql, [userType], (err, results) => {
+    if (err) {
+      console.error('Error querying database:', err);
+      return res.status(500).json({ error: 'Error querying database' });
+    }
+
+    console.log('Database query results:', results);
+
+    if (results.length > 0) {
+      res.status(200).json(results);
+    } else {
+      res.status(200).json([]); // Returning an empty array if no users found
+    }
+  });
+});
+
+{/*Check user*/}
+// Check all users
+app.get('/api/checkseller', (req, res) => {
+  const userType="Seller";
+  const sql = 'SELECT * FROM users where userType=?';
+  
+  db.query(sql, [userType], (err, results) => {
+    if (err) {
+      console.error('Error querying database:', err);
+      return res.status(500).json({ error: 'Error querying database' });
+    }
+
+    console.log('Database query results:', results);
+
+    if (results.length > 0) {
+      res.status(200).json(results);
+    } else {
+      res.status(200).json([]); // Returning an empty array if no users found
+    }
+  });
+});
+
+//inserting & deleting
+app.post('/api/userreason', (req, res) => {
+  const { username1, reason } = req.body;
+
+  console.log('Received request to remove user:', req.body);
+
+  // Start a transaction
+  db.beginTransaction(err => {
+    if (err) {
+      console.error('Error starting transaction:', err);
+      return res.status(500).json({ error: 'Error starting transaction' });
+    }
+
+    // Insert the username and reason into the 'removedusers' table
+    const insertSql = 'INSERT INTO removedusers (username, reason) VALUES (?, ?)';
+    db.query(insertSql, [username1, reason], (insertErr, insertResult) => {
+      if (insertErr) {
+        console.error('Error inserting into removedusers:', insertErr);
+        return db.rollback(() => {
+          res.status(500).json({ error: 'Error inserting into removedusers' });
+        });
+      }
+
+      console.log('User removal reason saved successfully:', insertResult);
+
+      // Delete the user from the 'users' table
+      const deleteSql = 'DELETE FROM users WHERE username = ?';
+      db.query(deleteSql, [username1], (deleteErr, deleteResult) => {
+        if (deleteErr) {
+          console.error('Error deleting user:', deleteErr);
+          return db.rollback(() => {
+            res.status(500).json({ error: 'Error deleting user' });
+          });
+        }
+
+        console.log('User deleted successfully:', deleteResult);
+
+        // Commit the transaction
+        db.commit(commitErr => {
+          if (commitErr) {
+            console.error('Error committing transaction:', commitErr);
+            return db.rollback(() => {
+              res.status(500).json({ error: 'Error committing transaction' });
+            });
+          }
+
+          res.status(200).json({ message: 'User removed and reason recorded successfully' });
+        });
+      });
+    });
+  });
+});
+
+//inserting & deleting
+app.post('/api/sellerreason', (req, res) => {
+  const { username2, reason } = req.body;
+
+  console.log('Received request to remove user:', req.body);
+
+  // Start a transaction
+  db.beginTransaction(err => {
+    if (err) {
+      console.error('Error starting transaction:', err);
+      return res.status(500).json({ error: 'Error starting transaction' });
+    }
+
+    // Insert the username and reason into the 'removedusers' table
+    const insertSql = 'INSERT INTO removedusers (username , reason) VALUES (?, ?)';
+    db.query(insertSql, [username2, reason], (insertErr, insertResult) => {
+      if (insertErr) {
+        console.error('Error inserting into removedusers:', insertErr);
+        return db.rollback(() => {
+          res.status(500).json({ error: 'Error inserting into removedusers' });
+        });
+      }
+
+      console.log('User removal reason saved successfully:', insertResult);
+
+      // Delete the user from the 'users' table
+      const deleteSql = 'DELETE FROM users WHERE username = ?';
+      db.query(deleteSql, [username2], (deleteErr, deleteResult) => {
+        if (deleteErr) {
+          console.error('Error deleting seller:', deleteErr);
+          return db.rollback(() => {
+            res.status(500).json({ error: 'Error deleting seller' });
+          });
+        }
+
+        console.log('Seller deleted successfully:', deleteResult);
+
+        // Commit the transaction
+        db.commit(commitErr => {
+          if (commitErr) {
+            console.error('Error committing transaction:', commitErr);
+            return db.rollback(() => {
+              res.status(500).json({ error: 'Error committing transaction' });
+            });
+          }
+
+          res.status(200).json({ message: 'seller removed and reason recorded successfully' });
+        });
+      });
+    });
+  });
+});
+
+app.post('/api/sdata', (req, res) => {
+  const { name } = req.body;
+
+  console.log('Received request to remove user:', req.body);
+
+  // Start a transaction
+  db.beginTransaction(err => {
+    if (err) {
+      console.error('Error starting transaction:', err);
+      return res.status(500).json({ error: 'Error starting transaction' });
+    }
+
+    // Insert the username and reason into the 'removedusers' table
+    const insertSql = 'INSERT INTO approvedseller (username) VALUES ( ?)';
+    db.query(insertSql, [name], (insertErr, insertResult) => {
+      if (insertErr) {
+        console.error('Error inserting into approved seller:', insertErr);
+        return db.rollback(() => {
+          res.status(500).json({ error: 'Error inserting into approved' });
+        });
+      }
+
+      console.log('User removal reason saved successfully:', insertResult);
+
+      // Delete the user from the 'users' table
+      const deleteSql = 'DELETE FROM screening WHERE name = ?';
+      db.query(deleteSql, [name], (deleteErr, deleteResult) => {
+        if (deleteErr) {
+          console.error('Error deleting seller:', deleteErr);
+          return db.rollback(() => {
+            res.status(500).json({ error: 'Error deleting seller' });
+          });
+        }
+
+        console.log('Seller deleted successfully:', deleteResult);
+
+        // Commit the transaction
+        db.commit(commitErr => {
+          if (commitErr) {
+            console.error('Error committing transaction:', commitErr);
+            return db.rollback(() => {
+              res.status(500).json({ error: 'Error committing transaction' });
+            });
+          }
+
+          res.status(200).json({ message: 'seller removed and disapproved successfully' });
+        });
+      });
+    });
+  });
+});
+//Removed userData fetching
+app.get('/api/handleremove', (req, res) => {
+  const userType="Seller";
+  const sql = 'SELECT * FROM removedusers';
+  
+  db.query(sql, [userType], (err, results) => {
+    if (err) {
+      console.error('Error querying database:', err);
+      return res.status(500).json({ error: 'Error querying database' });
+    }
+
+    console.log('Database query results:', results);
+
+    if (results.length > 0) {
+      res.status(200).json(results);
+    } else {
+      res.status(200).json([]); // Returning an empty array if no users found
+    }
+  });
+});
+
+app.get('/api/userscreening', (req, res) => {
+  const sql = 'SELECT * FROM screening';
+  
+  db.query(sql, (err, results) => {
+    if (err) {
+      console.error('Error querying database:', err);
+      return res.status(500).json({ error: 'Error querying database' });
+    }
+
+    console.log('Database query results:', results);
+
+    if (results.length > 0) {
+      res.status(200).json(results);
+    } else {
+      res.status(200).json([]); // Returning an empty array if no users found
+    }
+  });
+});
+
+//check order Data
+app.post('/api/orderdata', (req, res) => {
+  const { sellername } = req.body;
+  const sql = 'SELECT * FROM orders WHERE sname = ?';
+
+  db.query(sql, [sellername], (err, results) => {
+    if (err) {
+      console.error('Error querying database:', err);
+      return res.status(500).json({ error: 'Error querying database' });
+    }
+
+    console.log('Database query results:', results);
+
+    if (results.length > 0) {
+      res.status(200).json({ message: "Successfully Fetched Data", data: results });
+    } else {
+      res.status(200).json({ message: "No meals", data: [] });
+    }
+  });
+});
+ //Fetching approved seller data
+app.get('/api/approvedsellers', (req, res) => {
+  const sql = 'SELECT * FROM approvedseller';
+  
+  db.query(sql,(err, results) => {
+    if (err) {
+      console.error('Error querying database:', err);
+      return res.status(500).json({ error: 'Error querying database' });
+    }
+
+    console.log('Database query results:', results);
+
+    if (results.length > 0) {
+      res.status(200).json(results);
+    } else {
+      res.status(200).json([]); // Returning an empty array if no users found
+    }
+  });
+});
 
 
 // Start the server
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on http:+//localhost:${PORT}`);
 });
-
-
-
