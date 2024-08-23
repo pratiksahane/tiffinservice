@@ -9,7 +9,7 @@ const Blogs = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get('http://192.168.56.1:3002/api/blogs');
+        const response = await axios.get('http://localhost:3002/api/blogs');
         console.log('API response:', response.data); // Log to check the response
         setBlogs(Array.isArray(response.data) ? response.data : []);
       } catch (error) {
