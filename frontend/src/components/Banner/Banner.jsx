@@ -6,7 +6,7 @@ import Grapes from "../../assets/png/grapes.jpg";
 import Cherry from "../../assets/png/cherry.png";
 import PrimaryButton from '../Shared/PrimaryButton';
 
-const Banner = () => {
+const Banner = ({HandlePopup}) => {
   return (<>
   <div className='container py-14 relative'>
     <div className='realtive z-20'>
@@ -30,7 +30,9 @@ const Banner = () => {
     </div>
     {/*button section*/}
     <div data-aos="fade-up" data-aos-delay="500" data-aos-offset="0" className='flex justify-center mt-10 sm:mt-14'>
-        <PrimaryButton />
+    <button onClick={HandlePopup}>
+            <PrimaryButton onClick={HandlePopup}/>
+            </button>
     </div>
     </div>
 

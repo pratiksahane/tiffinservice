@@ -7,6 +7,7 @@ const Dashboarda = ({ userId, HandlePopup12, HandlePopup18,HandlePopup19,setUser
     const [CheckUserData, setCheckUserData] = useState([]);
     const [CheckSellerData, setCheckSellerData] = useState([]);
     const [CheckRemovedData, setCheckRemovedData] = useState([]);
+    const [ProfitData, setProfitData] = useState([]);
     const [ScreenData, setScreenData] = useState([]);
     const [error, setError] = useState(null);
 
@@ -46,6 +47,17 @@ const Dashboarda = ({ userId, HandlePopup12, HandlePopup18,HandlePopup19,setUser
         axios.get(`http://localhost:3002/api/handleremove`)
             .then(response => {
                 setCheckRemovedData(response.data);
+                setError(null);
+            })
+            .catch(error => {
+                console.error('There was an error fetching removed user data!', error);
+                setError('Unable to fetch removed user data.');
+            });
+    }
+    const HandleProfit = () => {
+        axios.get(`http://localhost:3002/api/handleprofit`)
+            .then(response => {
+                setProfitData(response.data);
                 setError(null);
             })
             .catch(error => {
@@ -131,8 +143,7 @@ const Dashboarda = ({ userId, HandlePopup12, HandlePopup18,HandlePopup19,setUser
                 <button onClick={HandleCheckUsers} className="bg-primary text-white px-4 py-2 rounded hover:bg-secondary hover:scale-105 duration-300 w-1/6">Check Users</button>
                 <button onClick={HandleCheckSellers} className="bg-primary text-white px-4 py-2 rounded hover:bg-secondary hover:scale-105 duration-300 w-1/6">Check Sellers</button>
                 <button onClick={HandleRemoved} className="bg-primary text-white px-4 py-2 rounded hover:bg-secondary hover:scale-105 duration-300 w-1/6">Removed Users/sellers</button>
-                <button className="bg-primary text-white px-4 py-2 rounded hover:bg-secondary hover:scale-105 duration-300 w-1/6">Add New Plans</button>
-                <button className="bg-primary text-white px-4 py-2 rounded hover:bg-secondary hover:scale-105 duration-300 w-1/6">Profit</button>
+                <button onClick={HandleProfit} className="bg-primary text-white px-4 py-2 rounded hover:bg-secondary hover:scale-105 duration-300 w-1/6">Profit</button>
                 <button onClick={HandleScreening} className="bg-primary text-white px-4 py-2 rounded hover:bg-secondary hover:scale-105 duration-300 w-1/6">Screening Proposals</button>
                 <button onClick={HandlePopup12} className="bg-primary text-white px-4 py-2 rounded hover:bg-secondary hover:scale-105 duration-300 w-1/6">Add Blogs</button>
                 <button onClick={handleLogout} className="bg-primary text-white px-4 py-2 rounded hover:bg-secondary hover:scale-105 duration-300 w-1/6">Logout</button>
@@ -260,6 +271,30 @@ const Dashboarda = ({ userId, HandlePopup12, HandlePopup18,HandlePopup19,setUser
                                             Approve
                                         </button>
                                     </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                ) : (
+                    <p className="text-lg text-center text-gray-700">No Users available</p>
+                )}
+            </div>
+            {/*Profit data Section */}
+            <div className="w-full bg-white shadow-lg rounded-lg p-4 mx-4 mt-4">
+                <h2 className="text-2xl font-bold text-primary text-center mb-4">Profit Incurred from both users as well as seller </h2>
+                {ProfitData && ProfitData.length > 0 ? (
+                    <table className="w-full text-left">
+                        <thead>
+                            <tr>
+                                <th className="py-2">UserType</th>
+                                <th className="py-2">Profit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {ProfitData.map((user, index) => (
+                                <tr key={index}>
+                                    <td className="border-b py-2">{user.userType}</td>
+                                    <td className="border-b py-2">{user.profit}</td>
                                 </tr>
                             ))}
                         </tbody>

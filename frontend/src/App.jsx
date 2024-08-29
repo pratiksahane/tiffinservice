@@ -245,12 +245,12 @@ const App = () => {
         <>
           <Navbar HandlePopup={HandlePopup} HandlePopup1={HandlePopup1} />
           <Routes>
-            <Route path="/" element={<Hero />} />
+            <Route path="/" element={<Hero HandlePopup={HandlePopup}/>} />
             <Route path="/about" element={<About HandlePopup={HandlePopup} />} />
             <Route path="/contact" element={<Footer />} />
             <Route path="/blog" element={<Blogs />} />
           </Routes>
-          <Banner />
+          <Banner HandlePopup={HandlePopup} />
           <Blogs />
           <WhyChoose />
           <About HandlePopup={HandlePopup}/>

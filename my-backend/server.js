@@ -20,7 +20,7 @@ const db = mysql.createConnection({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  port: process.env.DB_PORT || 3306,
+  port: process.env.DB_PORT,
 });
 
 
@@ -737,6 +737,26 @@ app.post('/api/orderdata', (req, res) => {
  //Fetching approved seller data
 app.get('/api/approvedsellers', (req, res) => {
   const sql = 'SELECT * FROM approvedseller';
+  
+  db.query(sql,(err, results) => {
+    if (err) {
+      console.error('Error querying database:', err);
+      return res.status(500).json({ error: 'Error querying database' });
+    }
+
+    console.log('Database query results:', results);
+
+    if (results.length > 0) {
+      res.status(200).json(results);
+    } else {
+      res.status(200).json([]); // Returning an empty array if no users found
+    }
+  });
+});
+
+ //Fetching Profit data
+ app.get('/api/handleprofit', (req, res) => {
+  const sql = 'SELECT * FROM profit';
   
   db.query(sql,(err, results) => {
     if (err) {

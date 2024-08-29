@@ -12,7 +12,7 @@ const BgStyle = {
   height: "100%",
 };
 
-const Hero = () => {
+const Hero = ({HandlePopup}) => {
   return (
     <div style={BgStyle} className='relative'>
       <div className='container py-16 sm:py-0'>
@@ -27,7 +27,9 @@ const Hero = () => {
             </p>
             {/* Button section */}
             <div data-aos="fade-up" data-aos-delay="500">
-            <PrimaryButton />
+              <button onClick={HandlePopup}>
+            <PrimaryButton onClick={HandlePopup}/>
+            </button>
             </div>
           </div>
 
