@@ -122,7 +122,7 @@ const Pay = ({ showPay, setShowPopup11, username, cartData1}) => {
                 readOnly
               />
               <input
-                type="text"
+                type="time"
                 placeholder='Enter Time(Ex.11:00p.m) For Delivery Or Takeout:'
                 className='w-full rounded-md border border-gray-300 dark:border-gray-500 px-2 py-1 mb-4'
                 value={time}

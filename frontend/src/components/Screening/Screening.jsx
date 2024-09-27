@@ -39,7 +39,8 @@ const Screening = ({ showScreeningPopout, setShowPopup3 ,sellername}) => {
             {/* Header section */}
             <div className='flex items-center justify-between'>
               <div>
-                <h1 className='text-2xl font-bold text-dark'>Adding new meal plan</h1>
+                <h1 className='text-2xl font-bold text-dark'>Screening Process
+                </h1>
               </div>
               <div>
                 <IoCloseOutline
